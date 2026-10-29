@@ -1,0 +1,122 @@
+<main class="container">
+
+  <header class="header">
+    <h1>Телефонный справочник</h1>
+
+    <p>
+      Приложение для управления телефонными контактами
+    </p>
+  </header>
+
+  <div class="workspace">
+
+    <section class="contacts">
+
+      <div class="section-header">
+        <h2>Контакты</h2>
+
+        <button
+          type="button"
+          (click)="newContact()"
+          [disabled]="loading"
+        >
+          Новый контакт
+        </button>
+      </div>
+
+      <p *ngIf="contacts.length === 0">
+        Список контактов пуст
+      </p>
+
+      <div
+        *ngFor="let contact of contacts"
+        class="contact-item"
+        [class.selected]="contact._id === selectedId"
+        (click)="selectContact(contact)"
+      >
+        <strong>{{ contact.username }}</strong>
+
+        <span>{{ contact.email }}</span>
+      </div>
+
+      <button
+        *ngIf="contacts.length > 0"
+        type="button"
+        class="danger"
+        (click)="deleteAll()"
+        [disabled]="loading"
+      >
+        Удалить все контакты
+      </button>
+
+    </section>
+
+    <section class="editor">
+
+      <h2>
+        {{ selectedId ? 'Редактирование' : 'Новый контакт' }}
+      </h2>
+
+      <label>Имя</label>
+
+      <input
+        type="text"
+        [(ngModel)]="form.username"
+        placeholder="Введите имя"
+      >
+
+      <label>Email</label>
+
+      <input
+        type="email"
+        [(ngModel)]="form.email"
+        placeholder="example@mail.ru"
+      >
+
+      <label>Мобильный телефон</label>
+
+      <input
+        type="text"
+        [(ngModel)]="form.telephone.mobile"
+        placeholder="+7 900 000-00-00"
+      >
+
+      <label>Домашний телефон</label>
+
+      <input
+        type="text"
+        [(ngModel)]="form.telephone.home"
+        placeholder="+7 495 000-00-00"
+      >
+
+      <p *ngIf="error" class="error">
+        {{ error }}
+      </p>
+
+      <div class="actions">
+
+        <button
+          type="button"
+          (click)="saveContact()"
+          [disabled]="loading"
+        >
+          {{ selectedId ? 'Сохранить изменения' : 'Добавить' }}
+        </button>
+
+        <button
+          *ngIf="selectedId"
+          type="button"
+          class="danger"
+          (click)="deleteContact()"
+          [disabled]="loading"
+        >
+          Удалить
+        </button>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</main>

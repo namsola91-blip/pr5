@@ -1,0 +1,22 @@
+.env
+.env.*
+!.env.example
+
+# Dependencies, builds and caches
+/node_modules/
+/dist/
+/.angular/
+/coverage/
+/out-tsc/
+/.codebase-memory/
+
+# Local editor settings and operating system files
+/.vscode/
+/.idea/
+.DS_Store
+Thumbs.db
+
+# Logs and private keys
+*.log
+*.pem
+*.key
